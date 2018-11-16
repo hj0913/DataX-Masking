@@ -1,0 +1,14 @@
+{
+    "name": "coswriter",
+    "parameter": {
+        "secretId": "",
+        "secretKey": "",
+        "region": "",
+        "bucket": "",
+        "object": "",
+        "encoding": "",
+        "fieldDelimiter": "",
+        "writeMode": "",
+        "primaryColumn": ""
+    }
+}

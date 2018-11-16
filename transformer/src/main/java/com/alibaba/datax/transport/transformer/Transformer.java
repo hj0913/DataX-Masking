@@ -25,4 +25,12 @@ public abstract class Transformer {
      * @param paras  transformer函数参数
      */
     abstract public Record evaluate(Record record, Object... paras);
+
+    /**
+     * @param record 行记录，UDF进行record的处理后，更新相应的record
+     * @param paras  transformer函数参数
+     */
+    public Record evaluate(Record record, boolean[] flag, Object... paras) {
+        return null;
+    }
 }

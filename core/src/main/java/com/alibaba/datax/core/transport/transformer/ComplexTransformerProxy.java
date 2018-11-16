@@ -23,6 +23,11 @@ public class ComplexTransformerProxy extends ComplexTransformer {
         return this.realTransformer.evaluate(record, paras);
     }
 
+    @Override
+    public Record evaluate(Record record, Map<String, Object> tContext, boolean[] flag, Object... paras) {
+        return this.realTransformer.evaluate(record, flag, paras);
+    }
+
     public Transformer getRealTransformer() {
         return realTransformer;
     }

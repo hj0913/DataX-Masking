@@ -60,7 +60,9 @@ public abstract class TransformerExchanger {
         long diffExaustedTime = 0;
         String errorMsg = null;
         boolean failed = false;
+        boolean[] flag = {false};
         for (TransformerExecution transformerInfoExec : transformerExecs) {
+
             long startTs = System.nanoTime();
 
             if (transformerInfoExec.getClassLoader() != null) {
@@ -83,13 +85,13 @@ public abstract class TransformerExchanger {
             }
 
             try {
-                result = transformerInfoExec.getTransformer().evaluate(result, transformerInfoExec.gettContext(), transformerInfoExec.getFinalParas());
+                result = transformerInfoExec.getTransformer().evaluate(result, transformerInfoExec.gettContext(),flag, transformerInfoExec.getFinalParas());
             } catch (Exception e) {
                 errorMsg = String.format("transformer(%s) has Exception(%s)", transformerInfoExec.getTransformerName(),
                         e.getMessage());
                 failed = true;
                 //LOG.error(errorMsg, e);
-                // transformerInfoExec.addFailedRecords(1);
+                //transformerInfoExec.addFailedRecords(1);
                 //脏数据不再进行后续transformer处理，按脏数据处理，并过滤该record。
                 break;
 
@@ -113,17 +115,24 @@ public abstract class TransformerExchanger {
             diffExaustedTime += diff;
             //transformerInfoExec.addSuccessRecords(1);
         }
-
         totalExaustedTime += diffExaustedTime;
+        if(flag[0]){
+            totalFailedRecords++;
+            //this.pluginCollector.collectMessage(record.toString(), errorMsg);
+            return null;
+        }else {
+            totalSuccessRecords++;
+            return result;
+        }
 
-        if (failed) {
+        /*if (failed) {
             totalFailedRecords++;
             this.pluginCollector.collectDirtyRecord(record, errorMsg);
             return null;
         } else {
             totalSuccessRecords++;
             return result;
-        }
+        }*/
     }
 
     public void doStat() {
@@ -142,6 +151,4 @@ public abstract class TransformerExchanger {
         currentCommunication.setLongCounter(CommunicationTool.TRANSFORMER_FILTER_RECORDS, totalFilterRecords);
         currentCommunication.setLongCounter(CommunicationTool.TRANSFORMER_USED_TIME, totalExaustedTime);
     }
-
-
 }

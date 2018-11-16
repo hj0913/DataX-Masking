@@ -9,10 +9,6 @@ import java.util.Arrays;
 
 /**
  * Created by Liu Kun on 2018/5/9.
- *
- * 目前只实现了针对数值型数据提供中心化差分隐私支持的干扰技术——拉普拉斯机制
- *
- * 尚未实现针对类别型数据的指数机制，还有针对本地化差分隐私的随机应答干扰机制
  */
 public class EDPTransformer extends Transformer{
     private Object masker;
@@ -20,7 +16,7 @@ public class EDPTransformer extends Transformer{
     int columnIndex;
 
     public EDPTransformer(){
-        setTransformerName("dx_edp_lap");
+        setTransformerName("dx_edp");
         System.out.println("Using Epsilon Differential Privacy masker");
     }
 
@@ -28,7 +24,7 @@ public class EDPTransformer extends Transformer{
     public Record evaluate(Record record, Object... paras) {
         try {
             if (paras.length < 2) {
-                throw new RuntimeException("dx_edp_lap transformer缺少参数");
+                throw new RuntimeException("dx_edp transformer缺少参数");
             }
             columnIndex = (Integer) paras[0];
             key = (String) paras[1];

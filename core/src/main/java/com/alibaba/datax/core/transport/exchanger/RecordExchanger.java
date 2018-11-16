@@ -83,6 +83,9 @@ public class RecordExchanger extends TransformerExchanger implements RecordSende
 		if(shutdown){
 			throw DataXException.asDataXException(CommonErrorCode.SHUT_DOWN_TASK, "");
 		}
+
+		System.out.println("--------------doTransformer---------------");
+
 		record = doTransformer(record);
 		if (record == null) {
 			return;

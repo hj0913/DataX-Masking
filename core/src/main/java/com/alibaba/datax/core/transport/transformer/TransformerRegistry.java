@@ -45,6 +45,15 @@ public class TransformerRegistry {
         registTransformer(new MaskTransformer());   //加密方法
         registTransformer(new MD5Transformer());
         registTransformer(new PrefixPreserveTransformer());
+
+        //时间格式转换
+        registTransformer(new DateTransformer());
+
+        //空格转换
+        registTransformer(new ClearSpaceTransformer());
+
+        //字符串长度转换
+        registTransformer(new StringLengthTransformer());
     }
 
     public static void loadTransformerFromLocalStorage() {

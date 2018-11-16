@@ -23,7 +23,7 @@ DataX-Masking 通过扩展DataX的transformer中间件，集成了多种脱敏�
 |Enumerate|将数字映射为新值，同时保持数据的大小顺序。|500->1500 600->1860 700->2000|
 |Prefix Preserve|保持前n位不变，混淆其余部分。可针对字母和数字字符在同为字母或数字范围内进行混淆，特殊符号将保留。|10.199.90.105->10.199.38.154<br>18965432100->18985214789|
 |MD5|不可逆的hash摘要方法。将不定长的数据映射成定长的数据(长度为32的字符串)。|你好世界！->4f025928d787aa7b73beb58c1a85b11d|
-|EDP_LAP|用于支持 Epsilon Differential Privacy 的拉普拉斯干扰技术| 17.5 -> 17.962 |
+|EDP|Epsilon Differential Privacy | 17.5 -> 17.962 |
 |AES|AES-128-CBC 对称加密|你好世界！-> 12da3fedd5f0992447b1c7b4af0d7133|
 | FPE | format Preserving Encryption | abcdefg -> iskejtl |
 
@@ -64,9 +64,9 @@ DataX目前已经有了比较全面的插件体系，主流的RDBMS数据库、N
 * Liu Jiaye
 
 ## 我要开发新的插件
-请点击：
-* [DataX transformer插件开发](https://blog.csdn.net/landstream/article/details/79933800)
-* [DataX 官方插件开发指南](https://github.com/alibaba/DataX/blob/master/dataxPluginDev.md)
+请点击：[DataX transformer插件开发](https://blog.csdn.net/landstream/article/details/79933800)
+
+## 当前版本 0.3 Beta
 
 ### Notice!
 * 当前版本仅在开发环境下进行过测试
@@ -74,8 +74,8 @@ DataX目前已经有了比较全面的插件体系，主流的RDBMS数据库、N
 
 ### Future
 * 提供可对中文字符进行加密的保型加密
-* 提供以插件形式动态载入自定义transformer的功能
-* 
+* 提供动态加载自定义transformer的功能
+
 ## License
 
 This software is free to use under the Apache License [Apache license](/license.txt).
